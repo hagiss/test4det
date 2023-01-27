@@ -14,11 +14,13 @@ from detectron2.evaluation import COCOEvaluator
 try:
     register_coco_instances('coco_trash_train', {}, '/data/dataset/upstage/dataset/train.json', '/data/dataset/upstage/dataset/')
 except AssertionError:
+    print("aaaa")
     pass
 
 try:
     register_coco_instances('coco_trash_test', {}, '/data/dataset/upstage/dataset/test.json', '/data/dataset/upstage/dataset/')
 except AssertionError:
+    print("aaaa")
     pass
 
 MetadataCatalog.get('coco_trash_train').thing_classes = ["General trash", "Paper", "Paper pack", "Metal",
@@ -56,6 +58,8 @@ dataloader.test = L(build_detection_test_loader)(
     ),
     num_workers=4,
 )
+
+print("dataloader", dataloader)
 
 dataloader.evaluator = L(COCOEvaluator)(
     dataset_name="${..test.dataset.names}",

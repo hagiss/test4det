@@ -68,7 +68,7 @@ def do_train(args, cfg):
     cfg.optimizer.params.model = model
     optim = instantiate(cfg.optimizer)
 
-    print(cfg.dataloader.train)
+    # print(cfg.dataloader.train)
 
     train_loader = instantiate(cfg.dataloader.train)
 
@@ -107,7 +107,7 @@ def do_train(args, cfg):
 
 
 def main(args):
-    print(args.config_file)
+    # print(args.config_file)
     cfg = LazyConfig.load(args.config_file)
     cfg = LazyConfig.apply_overrides(cfg, args.opts)
     default_setup(cfg, args)
