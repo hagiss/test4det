@@ -68,6 +68,8 @@ def do_train(args, cfg):
     cfg.optimizer.params.model = model
     optim = instantiate(cfg.optimizer)
 
+    print(cof.dataloader.train)
+
     train_loader = instantiate(cfg.dataloader.train)
 
     model = create_ddp_model(model, **cfg.train.ddp)
