@@ -86,8 +86,8 @@ dataloader.train = L(build_detection_train_loader)(
     #     use_instance_mask=True,
     # ),
     mapper=MyMapper,
-    total_batch_size=4,
-    num_workers=4,
+    total_batch_size=1,
+    num_workers=1,
 )
 
 dataloader.test = L(build_detection_test_loader)(
