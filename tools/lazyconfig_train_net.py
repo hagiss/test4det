@@ -68,7 +68,7 @@ def do_train(args, cfg):
     cfg.optimizer.params.model = model
     optim = instantiate(cfg.optimizer)
 
-    print(cof.dataloader.train)
+    print(cfg.dataloader.train)
 
     train_loader = instantiate(cfg.dataloader.train)
 
