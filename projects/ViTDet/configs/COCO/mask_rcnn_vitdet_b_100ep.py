@@ -6,7 +6,7 @@ from detectron2.config import LazyCall as L
 from detectron2.solver import WarmupParamScheduler
 from detectron2.modeling.backbone.vit import get_vit_lr_decay_rate
 
-from ..common.coco_loader_lsj import dataloader
+# from ..common.coco_loader_lsj import dataloader
 
 
 model = model_zoo.get_config("common/models/mask_rcnn_vitdet.py").model

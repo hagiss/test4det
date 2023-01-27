@@ -9,7 +9,7 @@ from detectron2.modeling.roi_heads import (
 )
 
 from .mask_rcnn_vitdet_b_100ep import (
-    dataloader,
+    # dataloader,
     lr_multiplier,
     model,
     train,
