@@ -107,6 +107,7 @@ def do_train(args, cfg):
 
 
 def main(args):
+    print(args.config_file)
     cfg = LazyConfig.load(args.config_file)
     cfg = LazyConfig.apply_overrides(cfg, args.opts)
     default_setup(cfg, args)
