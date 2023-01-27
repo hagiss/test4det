@@ -344,10 +344,8 @@ def _train_loader_from_config(cfg, mapper=None, *, dataset=None, sampler=None):
         dataset = get_detection_dataset_dicts(
             cfg.DATASETS.TRAIN,
             filter_empty=cfg.DATALOADER.FILTER_EMPTY_ANNOTATIONS,
-            min_keypoints=cfg.MODEL.ROI_KEYPOINT_HEAD.MIN_KEYPOINTS_PER_IMAGE
-            if cfg.MODEL.KEYPOINT_ON
-            else 0,
-            proposal_files=cfg.DATASETS.PROPOSAL_FILES_TRAIN if cfg.MODEL.LOAD_PROPOSALS else None,
+            min_keypoints=0,
+            proposal_files=False,
         )
         _log_api_usage("dataset." + cfg.DATASETS.TRAIN[0])
 

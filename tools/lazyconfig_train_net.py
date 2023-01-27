@@ -240,6 +240,9 @@ def do_train(args, cfg):
     # training dataloader will filter out images without associated annotations
     cfg.DATALOADER.FILTER_EMPTY_ANNOTATIONS = True
 
+    cfg.SOLVER = CN()
+    cfg.SOLVER.IMS_PER_BATCH = 64
+
     # -----------------------------------------------------------------------------
 
     # train_loader = instantiate(cfg.dataloader.train)
