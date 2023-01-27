@@ -243,6 +243,14 @@ def do_train(args, cfg):
     cfg.SOLVER = CN()
     cfg.SOLVER.IMS_PER_BATCH = 64
 
+    cfg.MODEL = CN()
+    cfg.MODEL.LOAD_PROPOSALS = False
+    cfg.MODEL.MASK_ON = False
+    cfg.MODEL.KEYPOINT_ON = False
+
+    cfg.MODEL.ROI_KEYPOINT_HEAD = CN()
+    cfg.MODEL.ROI_KEYPOINT_HEAD.MIN_KEYPOINTS_PER_IMAGE = 1
+
     # -----------------------------------------------------------------------------
 
     # train_loader = instantiate(cfg.dataloader.train)
