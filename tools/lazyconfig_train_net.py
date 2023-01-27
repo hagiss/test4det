@@ -63,7 +63,7 @@ def do_train(args, cfg):
     """
     cfg.model.roi_heads.batch_size_per_image = 16
     for i in cfg.model.keys():
-        print(cfg.model.i)
+        print(cfg.model[i])
     model = instantiate(cfg.model)
     logger = logging.getLogger("detectron2")
     logger.info("Model:\n{}".format(model))
