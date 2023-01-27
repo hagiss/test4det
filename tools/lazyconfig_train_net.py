@@ -32,6 +32,22 @@ from detectron2.utils import comm
 logger = logging.getLogger("detectron2")
 
 
+# Register Dataset
+try:
+    register_coco_instances('coco_trash_train', {}, '/data/dataset/upstage/dataset/train.json', '/data/dataset/upstage/dataset/')
+except AssertionError:
+    print("aaaa")
+    pass
+
+try:
+    register_coco_instances('coco_trash_test', {}, '/data/dataset/upstage/dataset/test.json', '/data/dataset/upstage/dataset/')
+except AssertionError:
+    print("aaaa")
+    pass
+
+MetadataCatalog.get('coco_trash_train').thing_classes = ["General trash", "Paper", "Paper pack", "Metal",
+                                                         "Glass", "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing"]
+
 def do_test(cfg, model):
     if "evaluator" in cfg.dataloader:
         ret = inference_on_dataset(
