@@ -15,6 +15,7 @@ in the config file and implement a new train_net.py to handle them.
 import logging
 
 from detectron2.checkpoint import DetectionCheckpointer
+from detectron2.data import build_detection_test_loader, build_detection_train_loader
 from detectron2.config import LazyConfig, instantiate
 from detectron2.engine import (
     AMPTrainer,
@@ -49,6 +50,33 @@ except AssertionError:
 
 MetadataCatalog.get('coco_trash_train').thing_classes = ["General trash", "Paper", "Paper pack", "Metal",
                                                          "Glass", "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing"]
+
+
+def MyMapper(dataset_dict):
+    dataset_dict = copy.deepcopy(dataset_dict)
+    image = utils.read_image(dataset_dict['file_name'], format='BGR')
+
+    transform_list = [
+        T.RandomFlip(prob=0.5, horizontal=False, vertical=True),
+        T.RandomBrightness(0.8, 1.8),
+        T.RandomContrast(0.6, 1.3)
+    ]
+
+    image, transforms = T.apply_transform_gens(transform_list, image)
+
+    dataset_dict['image'] = torch.as_tensor(image.transpose(2,0,1).astype('float32'))
+
+    annos = [
+        utils.transform_instance_annotations(obj, transforms, image.shape[:2])
+        for obj in dataset_dict.pop('annotations')
+        if obj.get('iscrowd', 0) == 0
+    ]
+
+    instances = utils.annotations_to_instances(annos, image.shape[:2])
+    dataset_dict['instances'] = utils.filter_empty_instances(instances)
+
+    return dataset_dict
+
 
 def do_test(cfg, model):
     if "evaluator" in cfg.dataloader:
@@ -90,7 +118,10 @@ def do_train(args, cfg):
     cfg.dataloader.test.dataset.names = "coco_trash_test"
     print(cfg.dataloader.train)
 
-    train_loader = instantiate(cfg.dataloader.train)
+    # train_loader = instantiate(cfg.dataloader.train)
+    train_loader = build_detection_train_loader(
+        cfg, mapper=MyMapper, sampler=None
+        )
 
     model = create_ddp_model(model, **cfg.train.ddp)
     trainer = (AMPTrainer if cfg.train.amp.enabled else SimpleTrainer)(model, train_loader, optim)
