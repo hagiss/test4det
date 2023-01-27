@@ -28,6 +28,7 @@ from detectron2.engine import (
 from detectron2.engine.defaults import create_ddp_model
 from detectron2.evaluation import inference_on_dataset, print_csv_format
 from detectron2.utils import comm
+from detectron2.data.datasets import register_coco_instances
 
 logger = logging.getLogger("detectron2")
 
