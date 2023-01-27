@@ -68,7 +68,9 @@ def do_train(args, cfg):
     cfg.optimizer.params.model = model
     optim = instantiate(cfg.optimizer)
 
-    # print(cfg.dataloader.train)
+    cfg.dataloader.train.dataset.names = "coco_trash_train"
+    cfg.dataloader.test.dataset.names = "coco_trash_test"
+    print(cfg.dataloader.train)
 
     train_loader = instantiate(cfg.dataloader.train)
 
