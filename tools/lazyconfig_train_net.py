@@ -14,6 +14,7 @@ in the config file and implement a new train_net.py to handle them.
 """
 import logging
 
+import copy
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.data import build_detection_test_loader, build_detection_train_loader
 from detectron2.config import LazyConfig, instantiate
