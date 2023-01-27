@@ -114,9 +114,11 @@ def do_train(args, cfg):
     cfg.optimizer.params.model = model
     optim = instantiate(cfg.optimizer)
 
-    cfg.dataloader.train.dataset.names = "coco_trash_train"
-    cfg.dataloader.test.dataset.names = "coco_trash_test"
-    print(cfg.dataloader.train)
+    # cfg.dataloader.train.dataset.names = "coco_trash_train"
+    # cfg.dataloader.test.dataset.names = "coco_trash_test"
+    # print(cfg.dataloader.train)
+    cfg.DATASETS.TRAIN = ('coco_trash_train',)
+    cfg.DATASETS.TEST = ('coco_trash_test',)
 
     # train_loader = instantiate(cfg.dataloader.train)
     train_loader = build_detection_train_loader(
