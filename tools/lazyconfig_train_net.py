@@ -31,6 +31,7 @@ from detectron2.evaluation import inference_on_dataset, print_csv_format
 from detectron2.utils import comm
 from detectron2.data.datasets import register_coco_instances
 from detectron2.data import DatasetCatalog, MetadataCatalog
+from fvcore.common.config import CfgNode as _CfgNode
 
 logger = logging.getLogger("detectron2")
 
