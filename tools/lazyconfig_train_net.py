@@ -248,7 +248,7 @@ def do_train(args, cfg):
     cfg.DATALOADER.FILTER_EMPTY_ANNOTATIONS = True
 
     cfg.SOLVER = CN()
-    cfg.SOLVER.IMS_PER_BATCH = 4
+    cfg.SOLVER.IMS_PER_BATCH = 2
 
     cfg.MODEL = CN()
     cfg.MODEL.LOAD_PROPOSALS = False
