@@ -195,6 +195,9 @@ def do_train(args, cfg):
                 checkpointer (dict)
                 ddp (dict)
     """
+    cfg.model.roi_heads.num_classes = 10
+    cfg.model.roi_heads.batch_size_per_image = 128
+
     model = instantiate(cfg.model)
     logger = logging.getLogger("detectron2")
     logger.info("Model:\n{}".format(model))
@@ -245,7 +248,7 @@ def do_train(args, cfg):
     cfg.DATALOADER.FILTER_EMPTY_ANNOTATIONS = True
 
     cfg.SOLVER = CN()
-    cfg.SOLVER.IMS_PER_BATCH = 2
+    cfg.SOLVER.IMS_PER_BATCH = 4
 
     cfg.MODEL = CN()
     cfg.MODEL.LOAD_PROPOSALS = False
