@@ -61,7 +61,7 @@ def do_train(args, cfg):
                 checkpointer (dict)
                 ddp (dict)
     """
-    cfg.dataloader.train.total_batch_size = 16
+    cfg.dataloader.train.total_batch_size = 1
     cfg.model.roi_heads.batch_size_per_image = 16
     cfg.model.roi_heads.num_classes = 10
     for i in cfg.keys():
