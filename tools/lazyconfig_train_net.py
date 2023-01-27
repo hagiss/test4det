@@ -245,7 +245,7 @@ def do_train(args, cfg):
     cfg.DATALOADER.FILTER_EMPTY_ANNOTATIONS = True
 
     cfg.SOLVER = CN()
-    cfg.SOLVER.IMS_PER_BATCH = 64
+    cfg.SOLVER.IMS_PER_BATCH = 2
 
     cfg.MODEL = CN()
     cfg.MODEL.LOAD_PROPOSALS = False
@@ -255,6 +255,10 @@ def do_train(args, cfg):
     cfg.MODEL.ROI_KEYPOINT_HEAD = CN()
     cfg.MODEL.ROI_KEYPOINT_HEAD.MIN_KEYPOINTS_PER_IMAGE = 1
 
+
+    for i in cfg.keys():
+        print(i, cfg[i])
+        print(" ")
     # -----------------------------------------------------------------------------
 
     # train_loader = instantiate(cfg.dataloader.train)
