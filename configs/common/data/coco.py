@@ -10,10 +10,24 @@ from detectron2.data import (
 )
 from detectron2.evaluation import COCOEvaluator
 
+# Register Dataset
+try:
+    register_coco_instances('coco_trash_train', {}, '/data/dataset/upstage/dataset/train.json', '/data/dataset/upstage/dataset/')
+except AssertionError:
+    pass
+
+try:
+    register_coco_instances('coco_trash_test', {}, '/data/dataset/upstage/dataset/test.json', '/data/dataset/upstage/dataset/')
+except AssertionError:
+    pass
+
+MetadataCatalog.get('coco_trash_train').thing_classes = ["General trash", "Paper", "Paper pack", "Metal",
+                                                         "Glass", "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing"]
+
 dataloader = OmegaConf.create()
 
 dataloader.train = L(build_detection_train_loader)(
-    dataset=L(get_detection_dataset_dicts)(names="coco_2017_train"),
+    dataset=L(get_detection_dataset_dicts)(names="coco_trash_train"),
     mapper=L(DatasetMapper)(
         is_train=True,
         augmentations=[
@@ -32,7 +46,7 @@ dataloader.train = L(build_detection_train_loader)(
 )
 
 dataloader.test = L(build_detection_test_loader)(
-    dataset=L(get_detection_dataset_dicts)(names="coco_2017_val", filter_empty=False),
+    dataset=L(get_detection_dataset_dicts)(names="coco_trash_test", filter_empty=False),
     mapper=L(DatasetMapper)(
         is_train=False,
         augmentations=[
